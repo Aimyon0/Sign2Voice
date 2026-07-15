@@ -1,0 +1,61 @@
+P0: [Heading 2] 作品名称
+P1: [Normal] （不要出现任何涉及学校名称和指导老师等内容）
+P2: [Normal] 摘要	
+P3: [List Paragraph] 800字内
+P4: [Normal] 
+P5: [Normal] 第一部分  作品概述
+P6: [List Paragraph] 功能与特性
+P7: [List Paragraph] 400字内（可加重要图）；
+P8: [List Paragraph] 
+P9: [List Paragraph] 应用领域
+P10: [List Paragraph] 400字内（可加重要图）；
+P11: [List Paragraph] 
+P12: [List Paragraph] 主要技术特点
+P13: [List Paragraph] 400字内；
+P14: [List Paragraph] 
+P15: [List Paragraph] 主要性能指标
+P16: [List Paragraph] 200字内（建议用表格）；
+P17: [List Paragraph] 
+P18: [List Paragraph] 主要创新点
+P19: [List Paragraph] 200字以内（逐点给出）；
+P20: [Normal] 
+P21: [List Paragraph] 设计流程
+P22: [List Paragraph] 200字内（可加重要图）；
+P23: [Normal] 
+P24: [Normal] 第二部分  系统组成及功能说明
+P25: [Normal] 阐述具体的设计细节（图文结合）
+P26: [List Paragraph] 
+P27: [List Paragraph] 整体介绍
+P28: [List Paragraph] 给出系统整体框图，各子模块标注清楚，并进行整体的文字说明，需要表达出各模块之间的关系。
+P29: [List Paragraph] 
+P30: [List Paragraph] 硬件系统介绍
+P31: [List Paragraph] 2.2.1 硬件整体介绍；
+P32: [List Paragraph] 2.2.2 机械设计介绍（如果有的话，从总体到局部，逐级给出各组件的具体设计图，可以是CAD文件截图或者手绘图片）；
+P33: [Normal] 2.2.3 电路各模块介绍（从总体到局部，逐级给出各模块的具体设计图，并标记出关键的输入、输出信号线，可以是电路图、SCH原理图、PCB版图等截图）；
+P34: [Normal] 
+P35: [List Paragraph] 软件系统介绍
+P36: [List Paragraph] 2.3.1 软件整体介绍（含PC端或云端，结合关键图片）；
+P37: [Normal] 2.3.2 软件各模块介绍（根据总体框图，给出各模块的具体设计说明。从顶层到底层逐次给出各函数的流程图及其关键输入、输出变量）；
+P38: [Normal] 
+P39: [Normal] 第三部分  完成情况及性能参数
+P40: [Normal] 阐述最终实现的成果（图文结合，实物照片为主）
+P41: [List Paragraph]  整体介绍（整个系统实物的正面、斜45°全局性照片）
+P42: [Normal] 
+P43: [List Paragraph]  工程成果（分硬件实物、软件界面等设计结果）
+P44: [List Paragraph] 3.2.1 机械成果；（实物照片）
+P45: [List Paragraph] 3.2.2 电路成果；（实物照片）
+P46: [List Paragraph] 3.2.3 软件成果；（界面照片）
+P47: [Normal] 
+P48: [List Paragraph]  特性成果（逐个展示功能、性能参数等量化指标）（可加重要仪器测试或现场照片）；
+P49: [Normal] 
+P50: [Normal] 第四部分  总结
+P51: [List Paragraph] 
+P52: [List Paragraph] 
+P53: [List Paragraph]  可扩展之处
+P54: [List Paragraph] 300字内；
+P55: [List Paragraph]  心得体会
+P56: [Normal] 1000字内，可包括研发和制作细节；
+P57: [Normal] 
+P58: [Normal] 第五部分  参考文献
+P59: [Normal] 按照标准格式，限20篇以内。
+--- TABLES ---

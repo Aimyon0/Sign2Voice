@@ -1,0 +1,9 @@
+>>> D:\ai_studio\ai_core\4.0\Utilities\windows\stedgeai.exe validate --model C:\Users\zzc\Desktop\model\gesture_cnn_combined_int8.tflite --batch-size 10 --mode host --name gesture --verbosity 1 --c-api st-ai --compression high --optimization time --target stm32h7 --memory-pool E:\base\finaltest\.ai\run\run-2\.ai\mempools.json --save-csv --workspace E:\base\finaltest\.ai\run\run-2\.ai\st_ai_ws --output E:\base\finaltest\.ai\run\run-2\.ai\st_ai_output
+ST Edge AI Core v4.0.1-20581 7ed50de05
+
+INTERNAL ERROR: type other than float or double not supported
+
+Run failed: Error: validate error: INTERNAL ERROR: type other than float or double not supported. Please check the report for more details. Output: ST Edge AI Core v4.0.1-20581 7ed50de05
+PASS:   0%|          | 0/187 [00:00<?, ?it/s]                                                       
+INTERNAL ERROR: type other than float or double not supported
+ 

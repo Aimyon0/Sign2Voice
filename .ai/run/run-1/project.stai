@@ -1,0 +1,15 @@
+{
+  "toolchain": "MDK-ARM",
+  "variant": "Validation",
+  "fromMx": true,
+  "isGenerated": true,
+  "name": "run-1",
+  "createdAt": 1784117425813,
+  "lastModified": 1784117533624,
+  "lastAccessed": 1784117533612,
+  "type": "MxProject",
+  "mcu": "STM32H743VIT6",
+  "ioc": "",
+  "generator": "STM32CubeMX1",
+  "path": "E:\\base\\finaltest"
+}

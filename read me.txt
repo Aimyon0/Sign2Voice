@@ -1,0 +1,18 @@
+Seed AI使用说明
+
+本项目由个人独立开发。复现时请直接使用 Keil5 打开工程文件进行编译运行。
+如需使用 STM32CubeMX 重新生成代码，可能会导致部分配置被覆盖，从而引发问题。若确有需要，请务必按照以下步骤进行手动修改：
+
+在文件 stm32h7xx_hal_conf.h 中，取消对 HAL_DCMI_MODULE_ENABLED 和 HAL_TIM_MODULE_ENABLED 的注释，以启用 DCMI 和定时器模块；
+
+在文件 app_x-cube-ai.c 中，将原定义：
+ai_i8* data_ins[AI_CORN_IN_NUM] = {NULL};
+修改为：
+float* data_ins[AI_CORN_IN_NUM] = {NULL};
+将static  ai_buffer* ai_input;
+   static ai_buffer* ai_output;
+修改为： ai_buffer* ai_input;
+             ai_buffer* ai_output;
+注意：程序在运行过程中，可能在启动阶段出现一次轻微卡顿，此为已知现象，不影响核心功能与识别效果。
+
+感谢您的阅读与使用！

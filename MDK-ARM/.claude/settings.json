@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp E:/base/finaltest/.ai/run/generate-1/st_ai_output/network.c E:/base/finaltest/X-CUBE-AI/App/)",
+      "Bash(cp E:/base/finaltest/.ai/run/generate-1/st_ai_output/network.h E:/base/finaltest/X-CUBE-AI/App/)",
+      "Bash(cp E:/base/finaltest/.ai/run/generate-1/st_ai_output/network_data.c E:/base/finaltest/X-CUBE-AI/App/)",
+      "Bash(cp E:/base/finaltest/.ai/run/generate-1/st_ai_output/network_data.h E:/base/finaltest/X-CUBE-AI/App/)",
+      "Bash(cp E:/base/finaltest/.ai/run/generate-1/st_ai_output/network_details.h E:/base/finaltest/X-CUBE-AI/App/)",
+      "Bash(mkdir -p \"E:/base/finaltest/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1\")",
+      "Bash(cp \"C:/Users/zzc/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-TOUCHGFX/4.25.0/Projects/STM32F746G-DISCO/Applications/DynamicGraph/gcc/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c\" \"E:/base/finaltest/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/\")",
+      "Bash(cp \"C:/Users/zzc/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-TOUCHGFX/4.25.0/Projects/STM32F746G-DISCO/Applications/DynamicGraph/gcc/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h\" \"E:/base/finaltest/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/\")",
+      "Bash(cp \"C:/Users/zzc/STM32Cube/Repository/STM32Cube_FW_H7_V1.11.1/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/port.c\" \"E:/base/finaltest/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/\")",
+      "Bash(cp \"C:/Users/zzc/STM32Cube/Repository/STM32Cube_FW_H7_V1.11.1/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/portmacro.h\" \"E:/base/finaltest/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM7/r0p1/\")",
+      "Bash(python fix_app_ai.py)",
+      "Bash(python fix_eide.py)",
+      "Bash(cp \"e:/base/finaltest/MDK-ARM/startup_stm32h743xx.s\" \"e:/base/finaltest/MDK-ARM/startup_stm32h743xx_keil.s.bak\" *)",
+      "Bash(grep -v '//\\\\|USER CODE')",
+      "Bash(where arm-none-eabi-gcc *)",
+      "Bash(python revert_ac5.py)",
+      "Bash(cp \"e:/base/finaltest/Middlewares/ST/AI/Inc/\"*.h \"e:/base/finaltest/X-CUBE-AI/App/\" && echo \"All headers copied\")",
+      "Bash(cp \"C:/Users/zzc/STM32Cube/Repository/Packs/STMicroelectronics/X-CUBE-AI/10.1.0/Middlewares/ST/AI/Lib/MDK/STM32H7/NetworkRuntime1010_CM7_Keil.lib\" \"e:/base/finaltest/Middlewares/ST/AI/Lib/NetworkRuntime1010_CM7_Keil.lib\" && echo \"Restored\")",
+      "Bash(cp \"E:/base/finaltest - 副本/MDK-ARM/.eide/eide.yml\" \"E:/base/finaltest/MDK-ARM/.eide/eide.yml\")",
+      "Bash(cp \"E:/base/finaltest - 副本/MDK-ARM/.eide/env.ini\" \"E:/base/finaltest/MDK-ARM/.eide/env.ini\")",
+      "Bash(cp \"E:/base/finaltest - 副本/MDK-ARM/.eide/files.options.yml\" \"E:/base/finaltest/MDK-ARM/.eide/files.options.yml\")",
+      "Bash(python fix_eide_backup.py)",
+      "Bash(git add *)",
+      "Bash(rm -rf .git)",
+      "Bash(git init *)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\zzc\\STM32Cube\\Repository\\STM32Cube_FW_H7_V1.11.1\\Drivers\\CMSIS\\Device\\ST\\STM32H7xx\\Source\\Templates\\gcc",
+      "e:\\base\\finaltest\\Middlewares\\ST\\AI\\Inc",
+      "C:\\Users\\zzc\\STM32Cube\\Repository\\Packs\\STMicroelectronics\\X-CUBE-AI\\10.1.0\\Middlewares\\ST\\AI\\Lib\\MDK\\STM32H7"
+    ]
+  }
+}

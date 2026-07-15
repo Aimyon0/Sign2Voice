@@ -1,0 +1,29 @@
+# Build outputs
+build/
+finaltest/
+*.o *.obj *.axf *.elf *.hex *.bin *.lst *.map *.iex *.out
+
+# IDE & editors
+.uvguix.* .uvoptx *.uvprojx.bak_* .vscode/
+DebugConfig/ RTE/ .cmsis/ .mxproject .clang-format .gitignore_*
+*.code-workspace
+
+# CubeMX reports & JSON
+*_generate_report.txt
+*.c_info.json
+
+# Large external data
+MP3-TF-16P*/
+model/data/ .ai/
+
+# Docs (use separate repo or release)
+docs/
+
+# GCC migration leftovers
+*.ld *.bak *_keil.s.bak startup_stm32h743xx_keil* GCC/ build_rt/
+
+# Python scripts
+fix_*.py revert_*.py pack_submit.py fill_report.py
+
+# Temp
+*.pyc __pycache__/ *.bak *.tmp menu.c.bak

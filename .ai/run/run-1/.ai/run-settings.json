@@ -1,0 +1,60 @@
+{
+  "args": {
+    "model": "C:\\Users\\zzc\\Desktop\\model\\gesture_cnn_combined_int8.tflite",
+    "valinput": "",
+    "valoutput": "",
+    "batch-size": 10,
+    "mode": "host",
+    "optimization": "time",
+    "name": "network",
+    "verbosity": 1,
+    "c-api": "st-ai",
+    "target": "stm32h7",
+    "memory-pool": "E:\\base\\finaltest\\.ai\\run\\run-1\\.ai\\mempools.json"
+  },
+  "mempools": [
+    {
+      "name": "DTCMRAM",
+      "size": 131072,
+      "offset": 536870912,
+      "driver": "DTCMRAM",
+      "max": 131072,
+      "mode_available": []
+    },
+    {
+      "name": "RAM",
+      "size": 524288,
+      "offset": 603979776,
+      "driver": "RAM",
+      "max": 524288,
+      "mode_available": []
+    },
+    {
+      "name": "RAM_D2",
+      "size": 294912,
+      "offset": 805306368,
+      "driver": "RAM_D2",
+      "max": 294912,
+      "mode_available": []
+    },
+    {
+      "name": "RAM_D3",
+      "size": 65536,
+      "offset": 939524096,
+      "driver": "RAM_D3",
+      "max": 65536,
+      "mode_available": []
+    },
+    {
+      "name": "ITCMRAM",
+      "size": 65536,
+      "offset": 0,
+      "driver": "ITCMRAM",
+      "max": 65536,
+      "mode_available": []
+    }
+  ],
+  "exportWeightsAsBin": false,
+  "copyWeightsToRam": false,
+  "automaticFlash": true
+}

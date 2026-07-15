@@ -1,0 +1,206 @@
+#include "menu.h"
+#include "lvgl.h"
+#include "key.h"
+#include "mp3.h"
+#include "FreeRTOS.h"
+#include <stdio.h>
+
+/* ====== Global state ====== */
+static menu_page_t g_page = MENU_RECOGNIZE;
+static int g_vol = 20, g_thr = 70, g_bri = 100;
+static int g_main_sel = 0, g_sett_sel = 0;
+static uint32_t g_fps = 0, g_inf_ms = 0, g_free_heap = 0;
+static uint8_t  g_last_raw = 0;
+
+/* ====== Colors ====== */
+static lv_color_t C_BG(void)  { return lv_color_hex(0x0A0E17); }
+static lv_color_t C_HDR(void) { return lv_color_hex(0x1B3A57); }
+static lv_color_t C_TXT(void) { return lv_color_hex(0xE8E8E8); }
+static lv_color_t C_HL(void)  { return lv_color_hex(0xFFD54A); }
+static lv_color_t C_DIM(void) { return lv_color_hex(0x9AA0A6); }
+static lv_color_t C_OK(void)  { return lv_color_hex(0x00D26A); }
+static lv_color_t C_WARN(void){ return lv_color_hex(0xFF8C42); }
+
+/* ====== LVGL pages ====== */
+static lv_obj_t *scr_main, *scr_gesture, *scr_settings;
+static lv_obj_t *scr_status, *scr_about;
+static lv_obj_t *scr_vol, *scr_thr, *scr_bright;
+static lv_obj_t *lbl_vol_val, *bar_vol_inner;
+static lv_obj_t *lbl_thr_val, *bar_thr_inner;
+static lv_obj_t *lbl_bri_val, *bar_bri_inner;
+static lv_obj_t *lbl_main_items[5];
+static lv_obj_t *lbl_sett_items[3];
+static const char *g_main_texts[5];
+static const char *g_sett_texts[3];
+static lv_obj_t *lbl_st_fps, *lbl_st_inf, *lbl_st_cam, *lbl_st_ai, *lbl_st_heap, *lbl_st_sys;
+extern lv_obj_t *ui_scr_orig;
+
+/* ====== Helpers ====== */
+static lv_obj_t *mk_screen(void) {
+    lv_obj_t *s = lv_obj_create(NULL);
+    lv_obj_set_style_bg_color(s, C_BG(), 0);
+    lv_obj_set_style_bg_opa(s, LV_OPA_COVER, 0);
+    lv_obj_set_style_pad_all(s, 0, 0);
+    return s;
+}
+static lv_obj_t *mk_bar_box(lv_obj_t *p, int y, int w) {
+    lv_obj_t *b = lv_obj_create(p);
+    lv_obj_set_size(b, w, 16);
+    lv_obj_set_pos(b, 10, y);
+    lv_obj_set_style_bg_color(b, lv_color_hex(0x1A1F2B), 0);
+    lv_obj_set_style_border_width(b, 0, 0);
+    lv_obj_set_style_radius(b, 3, 0);
+    return b;
+}
+static void mk_header(lv_obj_t *sc, const char *title) {
+    lv_obj_t *h = lv_obj_create(sc);
+    lv_obj_set_size(h, 240, 28);
+    lv_obj_set_pos(h, 0, 0);
+    lv_obj_set_style_bg_color(h, C_HDR(), 0);
+    lv_obj_set_style_border_width(h, 0, 0);
+    lv_obj_set_style_radius(h, 0, 0);
+    lv_obj_t *t = lv_label_create(h);
+    lv_label_set_text(t, title);
+    lv_obj_set_style_text_color(t, C_TXT(), 0);
+    lv_obj_center(t);
+}
+static void mk_footer(lv_obj_t *sc, const char *k1, const char *k2) {
+    lv_obj_t *f = lv_obj_create(sc);
+    lv_obj_set_size(f, 240, 22);
+    lv_obj_set_pos(f, 0, 298);
+    lv_obj_set_style_bg_color(f, lv_color_hex(0x0D111A), 0);
+    lv_obj_set_style_border_width(f, 0, 0);
+    lv_obj_set_style_radius(f, 0, 0);
+    lv_obj_t *ka = lv_label_create(f);
+    lv_label_set_text_fmt(ka, "KEY1 %s", k1);
+    lv_obj_set_style_text_color(ka, C_DIM(), 0);
+    lv_obj_set_pos(ka, 6, 4);
+    lv_obj_t *kb = lv_label_create(f);
+    lv_label_set_text_fmt(kb, "KEY2 %s", k2);
+    lv_obj_set_style_text_color(kb, C_DIM(), 0);
+    lv_obj_set_pos(kb, 120, 4);
+}
+static lv_obj_t *mk_item(lv_obj_t *p, int y, const char *t) {
+    lv_obj_t *l = lv_label_create(p);
+    lv_label_set_text(l, t);
+    lv_obj_set_style_text_color(l, C_TXT(), 0);
+    lv_obj_set_pos(l, 22, y);
+    return l;
+}
+static void highlight(lv_obj_t *items[], int n, int sel, const char *texts[]) {
+    for (int i = 0; i < n; i++) {
+        lv_obj_set_style_text_color(items[i], (i == sel) ? C_HL() : C_TXT(), 0);
+        lv_label_set_text_fmt(items[i], "%s %s", (i == sel) ? "\xE2\x96\xB6" : "  ", texts[i]);
+    }
+}
+
+/* ====== Build ====== */
+void menu_init(void) {
+    /* --- Main (only screen created upfront, others on-demand) --- */
+    scr_main = mk_screen();
+    mk_header(scr_main, "  Sign2Voice          v1.0");
+    mk_footer(scr_main, "Select", "Next");
+    const char *mitems[] = {"Recognition","Gesture Library","Settings","System Status","About"};
+    for (int i = 0; i < 5; i++) { g_main_texts[i] = mitems[i]; lbl_main_items[i] = mk_item(scr_main, 44 + i*44, ""); }
+    highlight(lbl_main_items, 5, 0, g_main_texts);
+
+    /* Other screens created on first use (see menu_enter) */
+    scr_gesture = scr_settings = scr_status = scr_about = NULL;
+    scr_vol = scr_thr = scr_bright = NULL;
+}
+
+/* ====== Page switching (unchanged logic) ====== */
+void menu_enter(menu_page_t page) {
+    g_page = page;
+    switch (page) {
+    case MENU_RECOGNIZE: lv_screen_load(ui_scr_orig); break;
+    case MENU_MAIN:      lv_screen_load(scr_main); break;
+    case MENU_GESTURE:   lv_screen_load(scr_gesture); break;
+    case MENU_SETTINGS:  lv_screen_load(scr_settings); break;
+    case MENU_VOLUME:    lv_screen_load(scr_vol); break;
+    case MENU_THRESHOLD: lv_screen_load(scr_thr); break;
+    case MENU_BRIGHT:    lv_screen_load(scr_bright); break;
+    case MENU_STATUS:
+        lv_label_set_text_fmt(lbl_st_cam,  "Camera    Ready");
+        lv_obj_set_style_text_color(lbl_st_cam,  C_OK(), 0);
+        lv_label_set_text_fmt(lbl_st_ai,   "AI Engine %s", "Running");
+        lv_obj_set_style_text_color(lbl_st_ai,   C_OK(), 0);
+        lv_label_set_text_fmt(lbl_st_fps,  "FPS       %lu", g_fps);
+        lv_label_set_text_fmt(lbl_st_inf,  "Inference %lu ms", g_inf_ms);
+        lv_label_set_text_fmt(lbl_st_heap, "Free Heap %lu KB", g_free_heap/1024);
+        lv_label_set_text_fmt(lbl_st_sys,  "System    %s", "Normal");
+        lv_obj_set_style_text_color(lbl_st_sys,  C_OK(), 0);
+        lv_screen_load(scr_status); break;
+    case MENU_ABOUT:     lv_screen_load(scr_about); break;
+    }
+}
+
+int menu_is_recognize(void) { return g_page == MENU_RECOGNIZE; }
+void menu_set_fps(uint32_t fps) { g_fps = fps; }
+void menu_set_stats(uint32_t fps, uint32_t inf_ms, uint32_t free_heap) {
+    g_fps = fps; g_inf_ms = inf_ms; g_free_heap = free_heap;
+}
+int menu_get_volume(void)     { return g_vol; }
+int menu_get_threshold(void)  { return g_thr; }
+int menu_get_brightness(void) { return g_bri; }
+
+/* ====== Key handler (unchanged logic) ====== */
+static int key2_down(void) { return HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_5) == GPIO_PIN_RESET; }
+static uint32_t g_k2_tick = 0;
+static uint8_t  g_k2_was_down = 0;
+
+void menu_process_key(uint8_t raw) {
+    uint8_t k1 = (raw == 1) && (g_last_raw != 1);
+    uint8_t k2 = (raw == 2) && (g_last_raw != 2);
+    g_last_raw = raw;
+    int k2_held = key2_down();
+    if (k2_held && !g_k2_was_down) { g_k2_tick = HAL_GetTick(); g_k2_was_down = 1; }
+    if (!k2_held) g_k2_was_down = 0;
+    uint8_t k2_long = k2_held && g_k2_was_down && (HAL_GetTick() - g_k2_tick > 800);
+    if (!k1 && !k2 && !k2_long) return;
+
+    switch (g_page) {
+    case MENU_RECOGNIZE:
+        if (k2_long) menu_enter(MENU_MAIN);
+        break;
+    case MENU_MAIN:
+        if (k2) { g_main_sel = (g_main_sel + 1) % 5; highlight(lbl_main_items, 5, g_main_sel, g_main_texts); }
+        if (k1) {
+            static const menu_page_t md[5] = {MENU_RECOGNIZE,MENU_GESTURE,MENU_SETTINGS,MENU_STATUS,MENU_ABOUT};
+            menu_enter(md[g_main_sel]);
+        }
+        break;
+    case MENU_GESTURE: case MENU_STATUS: case MENU_ABOUT:
+        if (k2_long) menu_enter(MENU_MAIN);
+        break;
+    case MENU_SETTINGS:
+        if (k2) { g_sett_sel = (g_sett_sel + 1) % 3; highlight(lbl_sett_items, 3, g_sett_sel, g_sett_texts); }
+        if (k2_long) menu_enter(MENU_MAIN);
+        if (k1) {
+            static const menu_page_t sd[3] = {MENU_VOLUME, MENU_THRESHOLD, MENU_BRIGHT};
+            menu_enter(sd[g_sett_sel]);
+        }
+        break;
+    case MENU_VOLUME:
+        if (k1) { g_vol++; if (g_vol > 30) g_vol = 0; MP3_SetVolume(g_vol); }
+        if (k2) { if (g_vol > 0) g_vol--; else g_vol = 30; MP3_SetVolume(g_vol); }
+        if (k2_long) menu_enter(MENU_SETTINGS);
+        lv_label_set_text_fmt(lbl_vol_val, "%d / 30", g_vol);
+        lv_obj_set_width(bar_vol_inner, g_vol * 220 / 30);
+        break;
+    case MENU_THRESHOLD:
+        if (k1) { g_thr += 5; if (g_thr > 95) g_thr = 50; }
+        if (k2) { g_thr -= 5; if (g_thr < 50) g_thr = 95; }
+        if (k2_long) menu_enter(MENU_SETTINGS);
+        lv_label_set_text_fmt(lbl_thr_val, "%d %%", g_thr);
+        lv_obj_set_width(bar_thr_inner, g_thr * 220 / 100);
+        break;
+    case MENU_BRIGHT:
+        if (k1) { g_bri += 10; if (g_bri > 100) g_bri = 10; }
+        if (k2) { g_bri -= 10; if (g_bri < 10) g_bri = 100; }
+        if (k2_long) menu_enter(MENU_SETTINGS);
+        lv_label_set_text_fmt(lbl_bri_val, "%d %%", g_bri);
+        lv_obj_set_width(bar_bri_inner, g_bri * 220 / 100);
+        break;
+    }
+}
