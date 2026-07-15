@@ -1,0 +1,23 @@
+#ifndef _OV_Frame_H
+#define _OV_Frame_H
+
+#include "sys.h"
+#include "sccb.h"
+//////////////////////////////////////////////////////////////////////////////////
+
+//OV2640 相关设置函数声明
+
+
+/************************************************************************************************/
+
+
+
+void jpeg_data_process(void);
+
+void JPEG_mode(void);
+void rgblcd_dcmi_rx_callback(void);
+void RGB565_mode(void);
+
+
+
+#endif

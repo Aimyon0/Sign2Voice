@@ -1,0 +1,74 @@
+# ==============================================
+# STM32 + Keil MDK + CubeMX + EIDE .gitignore
+# ==============================================
+
+# --- Build outputs ---
+build/
+*.o
+*.obj
+*.axf
+*.elf
+*.hex
+*.bin
+*.lst
+*.map
+*.iex
+*.crf
+*.d
+*.dep
+*.out
+*.htm
+
+# --- Keil MDK ---
+*.uvguix.*
+*.uvoptx
+*.uvprojx.bak_*
+JLinkLog.txt
+JLinkSettings.ini
+*.ini
+
+# --- CubeMX ---
+.mxproject
+*.ioc.bak_*
+
+# --- EIDE ---
+*.code-workspace
+.env.ini.bak
+
+# --- Temporary / cache ---
+RTE/
+DebugConfig/
+.cmsis/
+.ai/
+.cache/
+__pycache__/
+*.pyc
+*.tmp
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- GCC artifacts ---
+*.ld
+*.lds
+GCC/
+
+# --- Backup / scripts ---
+*.bak
+fix_*.py
+revert_*.py
+pack_submit.py
+fill_report.py
+
+# --- Docs auto-generated ---
+Docs/*.html
+Docs/*.png

@@ -1,0 +1,65 @@
+>>> stedgeai generate --model gesture_cnn_combined_int8.tflite --optimization time --target stm32f4 --name network --workspace workspace --output output
+ST Edge AI Core v4.0.1-20581 7ed50de05
+Creating c (debug) info json file network_c_info.json
+ Exec/report summary (generate)
+ --------------------------------------------------------------------------------------------------------------------
+ model file         :   gesture_cnn_combined_int8.tflite   
+ type               :   tflite                                                                                       
+ c_name             :   network                                                                                      
+ compression        :   lossless                                                                                     
+ options            :   allocate-inputs, allocate-outputs, use-lite-runtime, use-st-ai                               
+ optimization       :   time                                                                                         
+ target/series      :   stm32f4                                                                                      
+ workspace dir      :   workspace                          
+ output dir         :   output                             
+ model_fmt          :   ss/sa per channel                                                                            
+ model_name         :   gesture_cnn_combined_int8                                                                    
+ model_hash         :   0x5f3c978ced3b7aff0142c989c3b31656                                                           
+ params #           :   142,333 items (139.41 KiB)                                                                   
+ --------------------------------------------------------------------------------------------------------------------
+ input 1/1          :   'serving_default_input_layer0', f32(1x64x64x3), 48.00 KBytes, activations                    
+ output 1/1         :   'conversion_14', f32(1x5), 20 Bytes, activations                                             
+ macc               :   7,332,386                                                                                    
+ weights (ro)       :   142,756 B (139.41 KiB) (1 segment) / -426,576(-74.9%) vs float model                         
+ activations (rw)   :   79,024 B (77.17 KiB) (1 segment) *                                                           
+ ram (total)        :   79,024 B (77.17 KiB) = 79,024 + 0 + 0                                                        
+ --------------------------------------------------------------------------------------------------------------------
+ (*) 'input'/'output' buffers are allocated in the activations buffer
+Computing AI RT data/code size (target=stm32f4)..
+ Requested memory size by section - "stm32f4" target
+ ------------------------------ -------- --------- ------ --------
+ module                             text    rodata   data      bss
+ ------------------------------ -------- --------- ------ --------
+ NetworkRuntime1201_CM4_GCC.a     13,644         0      0        0
+ network.o                         2,186       754    924        0
+ lib (toolchain)*                      0         0      0        0
+ ------------------------------ -------- --------- ------ --------
+ RT total**                       15,830       754    924        0
+ ------------------------------ -------- --------- ------ --------
+ weights                               0   142,760      0        0
+ activations                           0         0      0   79,024
+ states                                0         0      0        0
+ io                                    0         0      0        0
+ ------------------------------ -------- --------- ------ --------
+ TOTAL                            15,830   143,514    924   79,024
+ ------------------------------ -------- --------- ------ --------
+ *  toolchain objects (libm/libgcc*)
+ ** RT AI runtime objects (kernels+infrastructure)
+  Summary - "stm32f4" target
+  --------------------------------------------------
+               FLASH (ro)      %*   RAM (rw)      %
+  --------------------------------------------------
+  RT total         17,508   10.9%        924   1.2%
+  --------------------------------------------------
+  TOTAL           160,268             79,948
+  --------------------------------------------------
+  *  rt/total
+ Generated files (5)
+ ------------------------------------------------------------------------------------
+ network_data.h
+ network_data.c
+ network.h
+ network.c
+ network_details.h
+Creating txt report file network_generate_report.txt
+elapsed time (GENERATE): 2.759s
