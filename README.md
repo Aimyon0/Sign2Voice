@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/platform-STM32H743-orange.svg)](https://www.st.com/en/microcontrollers-microprocessors/stm32h743vi.html)
-[![Framework](https://img.shields.io/badge/framework-FreeRTOS%20%2B%20LVGL%20v9-green.svg)]()
+[![Framework](<https://img.shields.io/badge/framework-FreeRTOS%20%2B%20LVGL%20v9-green.svg>)]()
 
 **Real-time hand gesture recognition on a $20 MCU.**
 
@@ -28,22 +28,22 @@ Sign2Voice is an embedded TinyML system that recognizes 5 static hand gestures u
 
 ## Hardware
 
-| Component | Model | Interface |
-|-----------|-------|-----------|
-| MCU | STM32H743VIT6 (Cortex-M7 @400MHz) | — |
-| Camera | OV2640 (2MP) | DCMI 8-bit + DMA |
-| Display | ILI9341 2.8" 320×240 | SPI2 @25MHz (DMA) |
-| Audio | MP3-TF-16P (YX5200) | USART1 9600bps |
-| Input | 2× push buttons | GPIO |
+| Component | Model                             | Interface         |
+| --------- | --------------------------------- | ----------------- |
+| MCU       | STM32H743VIT6 (Cortex-M7 @400MHz) | —                |
+| Camera    | OV2640 (2MP)                      | DCMI 8-bit + DMA  |
+| Display   | ILI9341 2.8" 320×240             | SPI2 @25MHz (DMA) |
+| Audio     | MP3-TF-16P (YX5200)               | USART1 9600bps    |
+| Input     | 2× push buttons                  | GPIO              |
 
 ### Memory Layout
 
-| Region | Size | Usage |
-|--------|------|-------|
-| DTCM | 128 KB | FreeRTOS kernel, task stacks |
-| AXI SRAM | 512 KB | Frame buffer (150 KB), AI runtime |
-| SRAM1+2 | 256 KB | DMA buffers, LVGL display buffers |
-| Flash | 2 MB | Application code + AI model weights |
+| Region   | Size   | Usage                               |
+| -------- | ------ | ----------------------------------- |
+| DTCM     | 128 KB | FreeRTOS kernel, task stacks        |
+| AXI SRAM | 512 KB | Frame buffer (150 KB), AI runtime   |
+| SRAM1+2  | 256 KB | DMA buffers, LVGL display buffers   |
+| Flash    | 2 MB   | Application code + AI model weights |
 
 See [Docs/Memory-Layout.md](Docs/Memory-Layout.md) for details.
 
@@ -62,11 +62,11 @@ HAL          └─ STM32H7 HAL + CMSIS
 
 ### Task Model
 
-| Task | Priority | Stack | Role |
-|------|----------|-------|------|
-| `display_lcd` | Normal | 4096 words | Camera refresh, LVGL render, key scan, MP3 play |
-| `info` | Normal | 2048 words | Block on frame queue → Preprocess → AI Inference → Mail result |
-| `out` | Low | 1024 words | MP3 background (idle) |
+| Task            | Priority | Stack      | Role                                                              |
+| --------------- | -------- | ---------- | ----------------------------------------------------------------- |
+| `display_lcd` | Normal   | 4096 words | Camera refresh, LVGL render, key scan, MP3 play                   |
+| `info`        | Normal   | 2048 words | Block on frame queue → Preprocess → AI Inference → Mail result |
+| `out`         | Low      | 1024 words | MP3 background (idle)                                             |
 
 See [Docs/Task-Diagram.md](Docs/Task-Diagram.md) for details.
 
@@ -94,21 +94,21 @@ See [Docs/AI-Pipeline.md](Docs/AI-Pipeline.md) for details.
 
 ## Performance
 
-| Metric | Value |
-|--------|-------|
-| MCU | STM32H743VIT6 @400 MHz |
-| Camera | OV2640, 320×240@30fps |
-| Display | ILI9341 SPI, 320×240 |
-| RTOS | FreeRTOS |
-| GUI | LVGL v9 |
-| AI Engine | X-CUBE-AI |
-| Model | CNN INT8 |
-| Inference Time | ~135 ms |
-| End-to-End Latency | ~215 ms |
-| Display FPS | ~6–7 |
-| Accuracy | 92.6% (5-class) |
-| Gestures | Fist / Like / No-gesture / OK / Palm |
-| Offline | Yes — zero cloud dependency |
+| Metric             | Value                                |
+| ------------------ | ------------------------------------ |
+| MCU                | STM32H743VIT6 @400 MHz               |
+| Camera             | OV2640, 320×240@30fps               |
+| Display            | ILI9341 SPI, 320×240                |
+| RTOS               | FreeRTOS                             |
+| GUI                | LVGL v9                              |
+| AI Engine          | X-CUBE-AI                            |
+| Model              | CNN INT8                             |
+| Inference Time     | ~135 ms                              |
+| End-to-End Latency | ~215 ms                              |
+| Display FPS        | ~6–7                                |
+| Accuracy           | 92.6% (5-class)                      |
+| Gestures           | Fist / Like / No-gesture / OK / Palm |
+| Offline            | Yes — zero cloud dependency         |
 
 ---
 
