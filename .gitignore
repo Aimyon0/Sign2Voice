@@ -27,3 +27,5 @@ fix_*.py revert_*.py pack_submit.py fill_report.py
 
 # Temp
 *.pyc __pycache__/ *.bak *.tmp menu.c.bak
+.cmsis/
+.ai/

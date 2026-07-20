@@ -18,6 +18,36 @@ virtualFolder:
         - name: User
           files: []
           folders:
+            - name: Core
+              files:
+                - path: ../Core/Src/lv_port_disp.c
+                - path: ../Core/Src/lv_port_indev.c
+                - path: ../Core/Src/lv_port_tick.c
+                - path: ../Core/Src/ui_overlay.c
+                - path: ../Core/Src/camera_band_refresh.c
+                - path: ../Core/Src/main.c
+                - path: ../Core/Src/gpio.c
+                - path: ../Core/Src/freertos.c
+                - path: ../Core/Src/dma.c
+                - path: ../Core/Src/spi.c
+                - path: ../Core/Src/usart.c
+                - path: ../Core/Src/stm32h7xx_it.c
+                - path: ../Core/Src/stm32h7xx_hal_msp.c
+                - path: ../Core/Src/stm32h7xx_hal_timebase_tim.c
+                - path: ../Core/Src/menu.c
+              folders: []
+            - name: App
+              files:
+                - path: ../App/gesture_app.c
+                - path: ../App/app_init.c
+              folders: []
+            - name: Service
+              files:
+                - path: ../Service/ai_service.c
+                - path: ../Service/camera_service.c
+                - path: ../Service/audio_service.c
+                - path: ../Service/ui_service.c
+              folders: []
             - name: X-CUBE-AI
               files: []
               folders:
@@ -26,67 +56,17 @@ virtualFolder:
                     - path: ../X-CUBE-AI/App/gesture.c
                     - path: ../X-CUBE-AI/App/gesture_data.c
                     - path: ../X-CUBE-AI/App/gesture_data_params.c
+                    - path: ../X-CUBE-AI/App/gesture_finetuned.c
+                    - path: ../X-CUBE-AI/App/gesture_finetuned_data.c
+                    - path: ../X-CUBE-AI/App/gesture_finetuned_data_params.c
                     - path: ../X-CUBE-AI/App/app_x-cube-ai.c
                   folders: []
-            - name: Core
-              files:
-                - path: ../Core/Src/main.c
-                - path: ../Core/Src/freertos.c
-                - path: ../Core/Src/stm32h7xx_it.c
-                - path: ../Core/Src/stm32h7xx_hal_msp.c
-                - path: ../Core/Src/stm32h7xx_hal_timebase_tim.c
-                - path: ../Core/Src/lv_port_disp.c
-                - path: ../Core/Src/lv_port_indev.c
-                - path: ../Core/Src/lv_port_tick.c
-                - path: ../Core/Src/ui_overlay.c
-                - path: ../Core/Src/camera_band_refresh.c
-                - path: ../Core/Src/menu.c
-                - path: ../Core/Src/gpio.c
-                - path: ../Core/Src/dma.c
-                - path: ../Core/Src/spi.c
-                - path: ../Core/Src/usart.c
-              folders: []
-        - name: hardware
-          files:
-            - path: HARDWARE/TIMER/timer.c
-            - path: HARDWARE/TIMER/delay.c
-            - path: HARDWARE/TIMER/led.c
-            - path: HARDWARE/TIMER/key.c
-            - path: HARDWARE/TIMER/mpu.c
-            - path: HARDWARE/TIMER/GBK_LibDrive.c
-            - path: HARDWARE/MP3/mp3.c
-            - path: system.c
-          folders: []
-        - name: LCD
-          files:
-            - path: HARDWARE/TIMER/FONT.c
-            - path: HARDWARE/TIMER/Picture.c
-            - path: HARDWARE/TIMER/Text.c
-            - path: HARDWARE/TIMER/Dis_Picture.c
-            - path: HARDWARE/TIMER/lcd.c
-          folders: []
-        - name: ov2640
-          files:
-            - path: HARDWARE/TIMER/dcmi.c
-            - path: HARDWARE/TIMER/stm32h7xx_hal_dcmi.c
-            - path: HARDWARE/TIMER/sccb.c
-            - path: HARDWARE/TIMER/ov2640.c
-            - path: HARDWARE/TIMER/OV_Frame.c
-            - path: HARDWARE/TIMER/usart2.c
-          folders: []
-    - name: Doc
-      files:
-        - path: X-CUBE-AI/App/gesture_generate_report.txt
-      folders: []
     - name: Drivers
       files: []
       folders:
         - name: STM32H7xx_HAL_Driver
           files:
-            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
-            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
-            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c
-            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c
+            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c
@@ -98,13 +78,14 @@ virtualFolder:
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c
-            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c
+            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c
+            - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c
             - path: ../Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c
           folders: []
@@ -112,9 +93,34 @@ virtualFolder:
           files:
             - path: ../Core/Src/system_stm32h7xx.c
           folders: []
-    - name: Lib
+    - name: hardware
       files:
-        - path: ../Middlewares/ST/AI/Lib/NetworkRuntime1010_CM7_Keil.lib
+        - path: HARDWARE/TIMER/timer.c
+        - path: system.c
+        - path: HARDWARE/TIMER/delay.c
+        - path: HARDWARE/TIMER/led.c
+        - path: HARDWARE/TIMER/key.c
+        - path: HARDWARE/TIMER/mpu.c
+        - path: HARDWARE/TIMER/GBK_LibDrive.c
+        - path: HARDWARE/MP3/mp3.c
+        - path: HARDWARE/MP3/mp3.h
+      folders: []
+    - name: LCD
+      files:
+        - path: HARDWARE/TIMER/FONT.c
+        - path: HARDWARE/TIMER/Picture.c
+        - path: HARDWARE/TIMER/Text.c
+        - path: HARDWARE/TIMER/Dis_Picture.c
+        - path: HARDWARE/TIMER/lcd.c
+      folders: []
+    - name: ov2640
+      files:
+        - path: HARDWARE/TIMER/dcmi.c
+        - path: HARDWARE/TIMER/stm32h7xx_hal_dcmi.c
+        - path: HARDWARE/TIMER/sccb.c
+        - path: HARDWARE/TIMER/ov2640.c
+        - path: HARDWARE/TIMER/OV_Frame.c
+        - path: HARDWARE/TIMER/usart2.c
       folders: []
     - name: Middlewares
       files: []
@@ -134,7 +140,6 @@ virtualFolder:
           folders: []
         - name: LVGL
           files:
-            - path: ../Middlewares/Third_Party/LVGL/src/lv_init.c
             - path: ../Middlewares/Third_Party/LVGL/src/core/lv_group.c
             - path: ../Middlewares/Third_Party/LVGL/src/core/lv_obj.c
             - path: ../Middlewares/Third_Party/LVGL/src/core/lv_obj_class.c
@@ -150,8 +155,13 @@ virtualFolder:
             - path: ../Middlewares/Third_Party/LVGL/src/core/lv_observer.c
             - path: ../Middlewares/Third_Party/LVGL/src/core/lv_refr.c
             - path: ../Middlewares/Third_Party/LVGL/src/display/lv_display.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/convert/lv_draw_buf_convert.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/dma2d/lv_draw_dma2d.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/dma2d/lv_draw_dma2d_fill.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/dma2d/lv_draw_dma2d_img.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_arc.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_blur.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_buf.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_image.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_label.c
@@ -159,71 +169,190 @@ virtualFolder:
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_mask.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_rect.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_triangle.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_vector.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_image_decoder.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/snapshot/lv_snapshot.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_a8.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888_premultiplied.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_rgb565_swapped.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_fill.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_img.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_letter.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_transform.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_mask.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_mask_rect.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_arc.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_blur.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_border.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_box_shadow.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_line.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_arc.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_triangle.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_fill.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_grad.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_img.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_letter.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_line.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_mask.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_mask_rect.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_transform.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_triangle.c
             - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_utils.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/convert/lv_draw_buf_convert.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_14.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_16.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_20.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_24.c
+            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_vector.c
+            - path: ../Middlewares/Third_Party/LVGL/src/drivers/display/ft81x/lv_ft81x.c
+            - path: ../Middlewares/Third_Party/LVGL/src/drivers/display/ili9341/lv_ili9341.c
+            - path: ../Middlewares/Third_Party/LVGL/src/drivers/display/st7735/lv_st7735.c
+            - path: ../Middlewares/Third_Party/LVGL/src/drivers/display/st7789/lv_st7789.c
+            - path: ../Middlewares/Third_Party/LVGL/src/drivers/display/st7796/lv_st7796.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/binfont_loader/lv_binfont_loader.c
             - path: ../Middlewares/Third_Party/LVGL/src/font/fmt_txt/lv_font_fmt_txt.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/font_manager/lv_font_manager.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/font_manager/lv_font_manager_recycle.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/imgfont/lv_imgfont.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_dejavu_16_persian_hebrew.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_10.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_12.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_12_subpx.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_14.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_14_aligned.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_16.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_18.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_20.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_22.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_24.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_26.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_28.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_28_compressed.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_30.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_32.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_34.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_36.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_38.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_40.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_42.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_44.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_46.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_48.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_8.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_source_han_sans_sc_14_cjk.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_source_han_sans_sc_16_cjk.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_unscii_16.c
+            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_unscii_8.c
+            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_gridnav.c
+            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_indev.c
+            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_indev_gesture.c
+            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_indev_scroll.c
+            - path: ../Middlewares/Third_Party/LVGL/src/layouts/flex/lv_flex.c
+            - path: ../Middlewares/Third_Party/LVGL/src/layouts/grid/lv_grid.c
+            - path: ../Middlewares/Third_Party/LVGL/src/layouts/lv_layout.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/barcode/code128.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/barcode/lv_barcode.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/bin_decoder/lv_bin_decoder.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/bmp/lv_bmp.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_cbfs.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_fatfs.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_frogfs.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_littlefs.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_memfs.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_posix.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_stdio.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_uefi.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_win32.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/gif/gif.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/lodepng/lodepng.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/lodepng/lv_lodepng.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/qrcode/lv_qrcode.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/qrcode/qrcodegen.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/rle/lv_rle.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/svg/lv_svg.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/svg/lv_svg_decoder.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/svg/lv_svg_parser.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/svg/lv_svg_render.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/svg/lv_svg_token.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/tiny_ttf/lv_tiny_ttf.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/tjpgd/lv_tjpgd.c
+            - path: ../Middlewares/Third_Party/LVGL/src/libs/tjpgd/tjpgd.c
+            - path: ../Middlewares/Third_Party/LVGL/src/lv_init.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/class/lv_cache_lru_ll.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/class/lv_cache_lru_rb.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/class/lv_cache_sc_da.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/instance/lv_image_cache.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/instance/lv_image_header_cache.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/lv_cache.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/lv_cache_entry.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_anim.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_anim_timeline.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_area.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_array.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_async.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_bidi.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_circle_buf.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_color.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_color_op.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_event.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_fs.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_grad.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_iter.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_ll.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_log.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_lru.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_math.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_matrix.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_palette.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_pending.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_profiler_builtin.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_profiler_builtin_posix.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_rb.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_style.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_style_gen.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_templ.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_text.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_text_ap.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_timer.c
+            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_tree.c
             - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_utils.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_array.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_async.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_bidi.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_iter.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_cmsis_rtos2.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_freertos.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_linux.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_mqx.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_os.c
             - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_os_none.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_pthread.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_rtthread.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_sdl2.c
+            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_windows.c
+            - path: ../Middlewares/Third_Party/LVGL/src/others/translation/lv_translation.c
             - path: ../Middlewares/Third_Party/LVGL/src/stdlib/builtin/lv_mem_core_builtin.c
             - path: ../Middlewares/Third_Party/LVGL/src/stdlib/builtin/lv_sprintf_builtin.c
             - path: ../Middlewares/Third_Party/LVGL/src/stdlib/builtin/lv_string_builtin.c
             - path: ../Middlewares/Third_Party/LVGL/src/stdlib/builtin/lv_tlsf.c
+            - path: ../Middlewares/Third_Party/LVGL/src/stdlib/clib/lv_mem_core_clib.c
+            - path: ../Middlewares/Third_Party/LVGL/src/stdlib/clib/lv_sprintf_clib.c
+            - path: ../Middlewares/Third_Party/LVGL/src/stdlib/clib/lv_string_clib.c
             - path: ../Middlewares/Third_Party/LVGL/src/stdlib/lv_mem.c
             - path: ../Middlewares/Third_Party/LVGL/src/themes/default/lv_theme_default.c
             - path: ../Middlewares/Third_Party/LVGL/src/themes/lv_theme.c
+            - path: ../Middlewares/Third_Party/LVGL/src/themes/mono/lv_theme_mono.c
+            - path: ../Middlewares/Third_Party/LVGL/src/themes/simple/lv_theme_simple.c
             - path: ../Middlewares/Third_Party/LVGL/src/tick/lv_tick.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/animimage/lv_animimage.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/arc/lv_arc.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/arclabel/lv_arclabel.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/bar/lv_bar.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/button/lv_button.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/buttonmatrix/lv_buttonmatrix.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar_chinese.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar_header_arrow.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar_header_dropdown.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/canvas/lv_canvas.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/chart/lv_chart.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/checkbox/lv_checkbox.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/dropdown/lv_dropdown.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/gif/lv_gif.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/image/lv_image.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/imagebutton/lv_imagebutton.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/ime/lv_ime_pinyin.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/keyboard/lv_keyboard.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/label/lv_label.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/led/lv_led.c
@@ -231,6 +360,32 @@ virtualFolder:
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/list/lv_list.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/menu/lv_menu.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/msgbox/lv_msgbox.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/objx_templ/lv_objx_templ.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_animimage_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_arc_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_bar_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_buttonmatrix_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_chart_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_checkbox_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_dropdown_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_image_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_keyboard_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_label_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_led_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_line_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_menu_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_obj_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_roller_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_scale_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_slider_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_span_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_spinbox_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_spinner_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_style_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_switch_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_table_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_tabview_properties.c
+            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_textarea_properties.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/roller/lv_roller.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/scale/lv_scale.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/slider/lv_slider.c
@@ -243,73 +398,18 @@ virtualFolder:
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/textarea/lv_textarea.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/tileview/lv_tileview.c
             - path: ../Middlewares/Third_Party/LVGL/src/widgets/win/lv_win.c
-            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_indev.c
-            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_indev_scroll.c
-            - path: ../Middlewares/Third_Party/LVGL/src/layouts/lv_layout.c
-            - path: ../Middlewares/Third_Party/LVGL/src/layouts/flex/lv_flex.c
-            - path: ../Middlewares/Third_Party/LVGL/src/layouts/grid/lv_grid.c
-            - path: ../Middlewares/Third_Party/LVGL/src/libs/bin_decoder/lv_bin_decoder.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/lv_cache.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/lv_cache_entry.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/instance/lv_image_cache.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/instance/lv_image_header_cache.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/cache/class/lv_cache_lru_rb.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar_header_arrow.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar_header_dropdown.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/animimage/lv_animimage.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_blur.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/lv_draw_sw_vector.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_blur.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/lv_draw_vector.c
-            - path: ../Middlewares/Third_Party/LVGL/src/indev/lv_indev_gesture.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_grad.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_matrix.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_pending.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_rb.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_templ.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_tree.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_circle_buf.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_profiler_builtin.c
-            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_freertos.c
-            - path: ../Middlewares/Third_Party/LVGL/src/osal/lv_os.c
-            - path: ../Middlewares/Third_Party/LVGL/src/stdlib/clib/lv_mem_core_clib.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_al88.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_argb8888.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_i1.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_l8.c
-            - path: ../Middlewares/Third_Party/LVGL/src/draw/sw/blend/lv_draw_sw_blend_to_rgb888.c
-            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_cbfs.c
-            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_fatfs.c
-            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_posix.c
-            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_stdio.c
-            - path: ../Middlewares/Third_Party/LVGL/src/libs/fsdrv/lv_fs_win32.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/calendar/lv_calendar_chinese.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_obj_properties.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/property/lv_style_properties.c
-            - path: ../Middlewares/Third_Party/LVGL/src/misc/lv_anim_timeline.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_12.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_18.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_22.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_26.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_28.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_30.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_32.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_34.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_36.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_38.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_40.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_42.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_44.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_46.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_48.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_8.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_montserrat_10.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_dejavu_16_persian_hebrew.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_unscii_8.c
-            - path: ../Middlewares/Third_Party/LVGL/src/font/lv_font_unscii_16.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/gif/lv_gif.c
-            - path: ../Middlewares/Third_Party/LVGL/src/widgets/ime/lv_ime_pinyin.c
           folders: []
+    - name: ::CMSIS
+      files: []
+      folders: []
+    - name: Lib
+      files:
+        - path: ../Middlewares/ST/AI/Lib/NetworkRuntime1010_CM7_Keil.lib
+      folders: []
+    - name: Doc
+      files:
+        - path: ../X-CUBE-AI/App/gesture_finetuned_generate_report.txt
+      folders: []
 dependenceList: []
 outDir: build
 miscInfo:
@@ -323,6 +423,8 @@ targets:
         - LV_CONF_INCLUDE_SIMPLE
       incList:
         - ../Core/Inc
+        - ../App
+        - ../Service
         - ../Drivers/STM32H7xx_HAL_Driver/Inc
         - ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
         - ../Drivers/CMSIS/Device/ST/STM32H7xx/Include
@@ -339,9 +441,6 @@ targets:
         - ../Drivers/CMSIS/Include
         - .cmsis/include
         - RTE/_finaltest
-        - HARDWARE
-        - HARDWARE/DCMI
-        - HARDWARE/DMA
       libList: []
     excludeList: []
     settings:
@@ -453,7 +552,7 @@ targets:
           version: 3
           afterBuildTasks: []
           asm-compiler:
-            $use: asm-auto
+            $use: asm
             defines: []
             misc-controls: ""
           beforeBuildTasks: []

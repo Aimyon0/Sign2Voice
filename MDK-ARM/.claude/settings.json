@@ -25,7 +25,8 @@
       "Bash(python fix_eide_backup.py)",
       "Bash(git add *)",
       "Bash(rm -rf .git)",
-      "Bash(git init *)"
+      "Bash(git init *)",
+      "Bash(git rm *)"
     ],
     "additionalDirectories": [
       "C:\\Users\\zzc\\STM32Cube\\Repository\\STM32Cube_FW_H7_V1.11.1\\Drivers\\CMSIS\\Device\\ST\\STM32H7xx\\Source\\Templates\\gcc",

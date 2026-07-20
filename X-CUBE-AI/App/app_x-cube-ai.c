@@ -58,23 +58,9 @@
 #include "gesture_data.h"
 
 /* USER CODE BEGIN includes */
-#include "OV_Frame.h"
 #include <stdio.h>
-#include "key.h"
-#include "LCD.h"
-#include "Dis_Picture.h" 
-#include "Text.h"	
-#include "GBK_LibDrive.h"	
-#include "mpu.h"
-#include "timer.h"
-#include "ov2640.h"
-#include "dcmi.h"
-#include "usart.h"
-#include "usart2.h"
 __attribute__((section("AI_RAM")))
 float ai_input_data[64*64*3] __attribute__((aligned(32)));
-
-extern int g_predicted_digit;
 /* USER CODE END includes */
 
 /* IO buffers ----------------------------------------------------------------*/
