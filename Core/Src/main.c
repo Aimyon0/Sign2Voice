@@ -23,6 +23,8 @@
 #include "delay.h"
 #include "ai_service.h"
 #include "app_init.h"
+#include "config.h"
+#include "log.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,9 +102,11 @@ int main(void)
 
   /* USER CODE BEGIN 2 */
   /* ── AI model init (must precede scheduler) ── */
-  MX_X_CUBE_AI_Init();
+  ai_service_init();
 
   /* ── System utilities ── */
+  log_init();
+  config_init();
   delay_init(SystemCoreClock / 1000000);
 
   /* ── Application layer init (drivers + services + UI) ── */

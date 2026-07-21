@@ -48,6 +48,14 @@ virtualFolder:
                 - path: ../Service/audio_service.c
                 - path: ../Service/ui_service.c
               folders: []
+            - name: Config
+              files:
+                - path: ../Config/config.c
+              folders: []
+            - name: Debug
+              files:
+                - path: ../Debug/log.c
+              folders: []
             - name: X-CUBE-AI
               files: []
               folders:
@@ -425,6 +433,9 @@ targets:
         - ../Core/Inc
         - ../App
         - ../Service
+        - ../Common
+        - ../Debug
+        - ../Config
         - ../Drivers/STM32H7xx_HAL_Driver/Inc
         - ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy
         - ../Drivers/CMSIS/Device/ST/STM32H7xx/Include

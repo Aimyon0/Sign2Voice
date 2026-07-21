@@ -1,12 +1,12 @@
 #include "menu.h"
 #include "lvgl.h"
 #include "key.h"
-#include "mp3.h"
+#include "config.h"
+#include "audio_service.h"
 #include "FreeRTOS.h"
 #include <stdio.h>
 
 static menu_page_t g_page = MENU_RECOGNIZE;
-static int g_vol = 20, g_thr = 70, g_bri = 5;
 static int g_main_sel = 0, g_sett_sel = 0;
 static uint32_t g_fps = 0, g_inf_ms = 0, g_free_heap = 0;
 static uint8_t  g_last_raw = 0;
@@ -196,7 +196,7 @@ void menu_init(void) {
     lv_disp_t *disp = lv_disp_get_default();
     if (disp) lv_disp_set_theme(disp, NULL);
     scr_main = mk_screen();
-    mk_hdr(scr_main, "Sign2Voice   v1.0");
+    mk_hdr(scr_main, "Sign2Voice   v2.1");
     mk_ftr(scr_main, "Select", "Next");
     const char *m[] = {"Recognition","Gesture Library","Settings","System Status","About"};
     for (int i = 0; i < 5; i++) { g_main_texts[i]=m[i]; lbl_main_items[i]=mk_item(scr_main, 38+i*38, m[i]); }
@@ -308,9 +308,9 @@ void menu_enter(menu_page_t page) {
 int menu_is_recognize(void){return g_page==MENU_RECOGNIZE;}
 void menu_set_fps(uint32_t fps){g_fps=fps;}
 void menu_set_stats(uint32_t f,uint32_t i,uint32_t h){g_fps=f;g_inf_ms=i;g_free_heap=h;}
-int menu_get_volume(void){return g_vol;}
-int menu_get_threshold(void){return g_thr;}
-int menu_get_brightness(void){return g_bri;}
+int menu_get_volume(void)   { return config_get_volume(); }
+int menu_get_threshold(void) { return config_get_threshold(); }
+int menu_get_brightness(void){ return config_get_window_size(); }
 
 /* ====== Keys ====== */
 static int k2d(void){return HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_5)==GPIO_PIN_RESET;}
@@ -334,25 +334,30 @@ void menu_process_key(uint8_t raw) {
         if(kl)menu_enter(MENU_MAIN);
         if(k1){static const menu_page_t s[3]={MENU_VOLUME,MENU_THRESHOLD,MENU_BRIGHT};menu_enter(s[g_sett_sel]);}
         break;
-    case MENU_VOLUME:
-        if(k1){g_vol++;if(g_vol>30)g_vol=0;MP3_SetVolume(g_vol);}
-        if(k2){if(g_vol>0)g_vol--;else g_vol=30;MP3_SetVolume(g_vol);}
+    case MENU_VOLUME: {
+        int v=config_get_volume();
+        if(k1){v++;if(v>30)v=0;}
+        if(k2){if(v>0)v--;else v=30;}
+        config_set_volume(v); audio_service_set_volume(v);
         if(kl)menu_enter(MENU_SETTINGS);
-        if(lbl_vol_val)lv_label_set_text_fmt(lbl_vol_val,"%d / 30",g_vol);
-        if(bar_vol_inner)lv_obj_set_width(bar_vol_inner,g_vol*220/30);
-        break;
-    case MENU_THRESHOLD:
-        if(k1){g_thr+=5;if(g_thr>95)g_thr=50;}
-        if(k2){g_thr-=5;if(g_thr<50)g_thr=95;}
+        if(lbl_vol_val)lv_label_set_text_fmt(lbl_vol_val,"%d / 30",v);
+        if(bar_vol_inner)lv_obj_set_width(bar_vol_inner,v*220/30);
+        break; }
+    case MENU_THRESHOLD: {
+        int t=config_get_threshold();
+        if(k1){t+=5;if(t>95)t=50;}
+        if(k2){t-=5;if(t<50)t=95;}
+        config_set_threshold(t);
         if(kl)menu_enter(MENU_SETTINGS);
-        if(lbl_thr_val)lv_label_set_text_fmt(lbl_thr_val,"%d %%",g_thr);
-        if(bar_thr_inner)lv_obj_set_width(bar_thr_inner,g_thr*220/100);
-        break;
+        if(lbl_thr_val)lv_label_set_text_fmt(lbl_thr_val,"%d %%",t);
+        if(bar_thr_inner)lv_obj_set_width(bar_thr_inner,t*220/100);
+        break; }
     case MENU_BRIGHT: {
         static const int wins[]={3,5,7}; static const char* wn[]={"3 frames","5 frames","7 frames"};
         static int wi=1;
-        if(k1){wi=(wi+1)%3;g_bri=wins[wi];}
-        if(k2){wi=(wi+2)%3;g_bri=wins[wi];}
+        if(k1){wi=(wi+1)%3;}
+        if(k2){wi=(wi+2)%3;}
+        config_set_window_size(wins[wi]);
         if(kl)menu_enter(MENU_SETTINGS);
         if(lbl_bri_val)lv_label_set_text(lbl_bri_val,wn[wi]);
         break; }

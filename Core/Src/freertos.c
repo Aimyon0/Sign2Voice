@@ -27,6 +27,7 @@
 #include "lvgl.h"
 #include "lv_port_tick.h"
 #include "camera_band_refresh.h"
+#include "config.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -156,13 +157,16 @@ void display_lcd1(void const * argument)
     ui_service_set_confidence("--%");
     ui_service_set_status("Ready");
     ui_service_update();
+
+    /* Init MP3 BEFORE menu (menu_init calls audio_service_set_volume) */
+    audio_service_init();
+    audio_service_set_volume(config_get_volume());
+
     menu_init();
     lv_timer_handler();
     osDelay(100);
 
-    /* Init MP3 + camera streaming */
-    audio_service_init();
-    audio_service_set_volume(20);
+    /* Start camera streaming */
     camera_service_start();
 
     /* Track menu→recognize transition for state reset */
