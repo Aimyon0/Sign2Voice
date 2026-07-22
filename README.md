@@ -33,7 +33,7 @@
 | Audio | MP3-TF-16P (YX5200 UART, microSD) |
 | Debug | ST-Link V2 |
 
-## Architecture (v2.0)
+## Architecture (v2.1)
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -47,6 +47,12 @@
 │  │ AI Svc   │ │ Camera   │ │Audio │ │  UI    │ │
 │  │          │ │ Svc      │ │Svc   │ │ Svc    │ │
 │  └──────────┘ └──────────┘ └──────┘ └────────┘ │
+├─────────────────────────────────────────────────┤
+│                    CONFIG                        │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────┐ │
+│  │    Config    │ │ Flash Storage│ │ ErrorCode│ │
+│  │ (SystemCfg)  │ │ (Bank2 Sct7) │ │  (enum)  │ │
+│  └──────────────┘ └──────────────┘ └──────────┘ │
 ├─────────────────────────────────────────────────┤
 │                    DRIVER                        │
 │  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐  │
@@ -62,14 +68,28 @@
 
 ```
 Sign2Voice/
-├── App/                    # Application layer (v2.0)
-│   ├── gesture_app.c/h     #   Recognition pipeline, sliding-window filter
+├── App/                    # Application layer (v2.1)
+│   ├── gesture_app.c/h     #   Recognition pipeline, cooldown, dedup
 │   └── app_init.c/h        #   Unified hardware + service init
-├── Service/                # Service layer (v2.0)
+├── Service/                # Service layer (v2.1)
 │   ├── ai_service.c/h      #   X-CUBE-AI wrapper, model-agnostic API
 │   ├── camera_service.c/h  #   OV2640 + DCMI + frame capture
 │   ├── audio_service.c/h   #   MP3 playback, class→track mapping
 │   └── ui_service.c/h      #   LVGL overlay + display refresh
+├── Config/                 # Configuration (v2.1)
+│   └── config.c/h          #   SystemConfig load/save/reset
+├── Storage/                # Flash persistence (v2.1)
+│   └── flash_storage.c/h   #   Bank2 Sector7 R/W (SRAM-resident)
+├── Common/                 # Shared (v2.1)
+│   └── error_code.h        #   Unified ErrorCode enum
+├── Debug/                  # Logging (v2.1)
+│   └── log.h/c             #   Compile-time controlled LOG macros
+├── Docs/                   # Documentation (v2.1)
+│   ├── Architecture.md     #   Layer diagram, task model, data flow
+│   ├── Configuration.md    #   Config struct, flash storage, debugging
+│   ├── ErrorHandling.md    #   Error codes, fault handlers
+│   ├── DebugGuide.md       #   Log levels, UART output, fault dump
+│   └── MemoryLayout.md     #   RAM/Flash regions, scatter file
 ├── Core/
 │   ├── Src/
 │   │   ├── freertos.c      #   3 RTOS tasks (display, inference, audio)
@@ -105,7 +125,7 @@ graph TD
 | DTCM | 0x20000000 | 128KB | Stack, FreeRTOS heap, critical BSS |
 | AXI SRAM | 0x24000000 | 512KB | `RGB_DATA` (150KB), `RGB_DATA_Contiguous`, AI buffers |
 | SRAM1+2 | 0x30000000 | 256KB | DCMI DMA double-buffer, LVGL draw buffers |
-| Flash | 0x08000000 | 2MB | Code + AI weights (216KB INT8) |
+| Flash | 0x08000000 | 2MB | Code + AI weights + Config (Sector7) |
 
 ## AI Model
 
@@ -155,7 +175,7 @@ See [plan.md](plan.md) for the full development roadmap.
 
 - [x] v1.0 — Functional prototype (gesture recognition + voice)
 - [x] v2.0 — Software architecture refactoring (App/Service/Driver layers)
-- [ ] v2.1 — Reliability & fault tolerance
+- [x] v2.1 — Reliability & fault tolerance (config persistence, watchdog, error codes, logging, docs)
 - [ ] v2.2 — Performance optimization (CMSIS-NN)
 - [ ] v2.3 — Documentation
 - [ ] v3.0 — Custom PCB hardware
