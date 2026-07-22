@@ -1,6 +1,6 @@
-LR_IROM1 0x08000000 0x00200000  {    ; load region size_region
-  ER_IROM1 0x08000000 0x00200000  {  ; load address = execution address
-   *.o (RESET, +First)
+LR_IROM1 0x08000000 0x00200000  {    ; 2MB total flash
+  ER_IROM1 0x08000000 0x001E0000  {  ; 1.875MB code: Bank1 + Bank2 S0~6
+   *.o (RESET, +First)               ; Bank2 Sector7 (0x081E0000,128KB) reserved for flash_storage
    *(InRoot$$Sections)
    .ANY (+RO)
    .ANY (+XO)

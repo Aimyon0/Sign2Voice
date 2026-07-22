@@ -219,22 +219,28 @@ static void f_settings(void) {
     highlight(lbl_sett_items,3,0,g_sett_texts);
 }
 static void f_vol(void) {
+    int v = config_get_volume();
     scr_vol=mk_screen(); mk_hdr(scr_vol,"Speaker Volume"); mk_ftr(scr_vol,"+","-");
-    lbl_vol_val=mk_item(scr_vol,60,"20 / 30"); lv_obj_set_style_text_color(lbl_vol_val,C_HL,0);
+    lbl_vol_val=mk_item(scr_vol,60,""); lv_obj_set_style_text_color(lbl_vol_val,C_HL,0);
+    lv_label_set_text_fmt(lbl_vol_val,"%d / 30",v);
     lv_obj_t *bx=mk_bar(scr_vol,92); bar_vol_inner=mk_bar_inner(bx);
-    lv_obj_set_width(bar_vol_inner,20*220/30);
+    lv_obj_set_width(bar_vol_inner,v*220/30);
 }
 static void f_thr(void) {
+    int t = config_get_threshold();
     scr_thr=mk_screen(); mk_hdr(scr_thr,"Confidence"); mk_ftr(scr_thr,"+","-");
-    lbl_thr_val=mk_item(scr_thr,60,"70 %"); lv_obj_set_style_text_color(lbl_thr_val,C_HL,0);
+    lbl_thr_val=mk_item(scr_thr,60,""); lv_obj_set_style_text_color(lbl_thr_val,C_HL,0);
+    lv_label_set_text_fmt(lbl_thr_val,"%d %%",t);
     lv_obj_t *bx=mk_bar(scr_thr,92); bar_thr_inner=mk_bar_inner(bx);
-    lv_obj_set_width(bar_thr_inner,70*220/100);
+    lv_obj_set_width(bar_thr_inner,t*220/100);
     mk_item(scr_thr,120,"Lower = more sensitive");
 }
 static void f_bright(void) {
+    int w = config_get_window_size();
     scr_bright=mk_screen(); mk_hdr(scr_bright,"Window Size"); mk_ftr(scr_bright,"+","-");
     mk_item(scr_bright,44,"Low    3 frames"); mk_item(scr_bright,86,"Medium  5 frames"); mk_item(scr_bright,128,"High    7 frames");
-    lbl_bri_val=mk_item(scr_bright,170,"5 frames"); lv_obj_set_style_text_color(lbl_bri_val,C_HL,0);
+    lbl_bri_val=mk_item(scr_bright,170,""); lv_obj_set_style_text_color(lbl_bri_val,C_HL,0);
+    lv_label_set_text_fmt(lbl_bri_val,"%d frames",w);
 }
 static void f_status(void)
 {
@@ -339,7 +345,7 @@ void menu_process_key(uint8_t raw) {
         if(k1){v++;if(v>30)v=0;}
         if(k2){if(v>0)v--;else v=30;}
         config_set_volume(v); audio_service_set_volume(v);
-        if(kl)menu_enter(MENU_SETTINGS);
+        if(kl){config_save(); menu_enter(MENU_SETTINGS);}
         if(lbl_vol_val)lv_label_set_text_fmt(lbl_vol_val,"%d / 30",v);
         if(bar_vol_inner)lv_obj_set_width(bar_vol_inner,v*220/30);
         break; }
@@ -348,7 +354,7 @@ void menu_process_key(uint8_t raw) {
         if(k1){t+=5;if(t>95)t=50;}
         if(k2){t-=5;if(t<50)t=95;}
         config_set_threshold(t);
-        if(kl)menu_enter(MENU_SETTINGS);
+        if(kl){config_save(); menu_enter(MENU_SETTINGS);}
         if(lbl_thr_val)lv_label_set_text_fmt(lbl_thr_val,"%d %%",t);
         if(bar_thr_inner)lv_obj_set_width(bar_thr_inner,t*220/100);
         break; }
@@ -358,7 +364,7 @@ void menu_process_key(uint8_t raw) {
         if(k1){wi=(wi+1)%3;}
         if(k2){wi=(wi+2)%3;}
         config_set_window_size(wins[wi]);
-        if(kl)menu_enter(MENU_SETTINGS);
+        if(kl){config_save(); menu_enter(MENU_SETTINGS);}
         if(lbl_bri_val)lv_label_set_text(lbl_bri_val,wn[wi]);
         break; }
     }
