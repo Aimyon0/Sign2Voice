@@ -31,7 +31,7 @@
 | Audio | MP3-TF-16P (YX5200 UART, microSD) |
 | Debug | ST-Link V2 |
 
-## Architecture (v2.1)
+## Architecture (v2.2)
 
 ```
 ┌─────────────────────────────────────────────────┐
@@ -134,7 +134,7 @@ graph TD
     DISPLAY -->|lv_timer_handler| LVGL[LVGL UI]
 ```
 
-## Configuration System (v2.1)
+## Configuration System
 
 A unified `SystemConfig` struct provides the single source of truth for all
 user-adjustable parameters. All modules read settings through `config_get_*()`
@@ -256,7 +256,7 @@ See [plan.md](plan.md) for the full development roadmap.
 - [x] v2.0 — Software architecture refactoring (App/Service/Driver layers)
 - [x] v2.1 — Reliability & maintainability (config persistence, error codes, logging, docs)
 - [x] v2.2 — Performance optimization (CMSIS-NN, watchdog, benchmark)
-- [ ] v2.3 — Extended documentation & developer guide
+- [x] v2.3 — Documentation (troubleshooting guide, architecture deep-dive, benchmark)
 - [ ] v3.0 — Custom PCB hardware
 
 ## License
