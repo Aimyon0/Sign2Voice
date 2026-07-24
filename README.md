@@ -240,11 +240,13 @@ zero CPU cycles, zero Flash bytes, zero UART traffic.
 
 | Document | Contents |
 |---|---|
-| [Architecture](Docs/Architecture.md) | Layer diagram, module list, RTOS task model, data flow |
+| [Architecture](Docs/Architecture.md) | Layer diagram, module index, task model, data flow, performance |
 | [Configuration](Docs/Configuration.md) | SystemConfig struct, Flash persistence API, debugging history |
 | [Error Handling](Docs/ErrorHandling.md) | ErrorCode enum, module error strategies, fault handlers |
 | [Debug Guide](Docs/DebugGuide.md) | Log levels, UART output, FreeRTOS stack/heap monitoring |
 | [Memory Layout](Docs/MemoryLayout.md) | RAM/Flash regions, scatter file, key symbol allocations |
+| [Benchmark](Docs/Benchmark.md) | Map-file-verified Flash/RAM budget, AI model metrics, task params |
+| [Troubleshooting](Docs/Troubleshooting.md) | Debug history: Flash HardFault, MP3 issues, boot crash, CMSIS-NN |
 
 ## Roadmap
 
