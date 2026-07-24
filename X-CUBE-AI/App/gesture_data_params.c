@@ -2,7 +2,7 @@
   ******************************************************************************
   * @file    gesture_data_params.c
   * @author  AST Embedded Analytics Research Platform
-  * @date    2026-07-15T22:14:31+0800
+  * @date    2026-07-24T21:07:09+0800
   * @brief   AI Tool Automatic Code Generator for Embedded NN computing
   ******************************************************************************
   * Copyright (c) 2026 STMicroelectronics.

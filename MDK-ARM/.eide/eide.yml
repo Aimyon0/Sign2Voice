@@ -416,7 +416,7 @@ virtualFolder:
       folders: []
     - name: Lib
       files:
-        - path: ../Middlewares/ST/AI/Lib/NetworkRuntime1010_CM7_Keil.lib
+        - path: ../Middlewares/ST/AI/Lib/NetworkRuntime1020_CM7_Keil.lib
       folders: []
     - name: Doc
       files:
