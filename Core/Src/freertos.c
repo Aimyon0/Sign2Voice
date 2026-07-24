@@ -28,6 +28,7 @@
 #include "lv_port_tick.h"
 #include "camera_band_refresh.h"
 #include "config.h"
+#include "watchdog.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -166,7 +167,8 @@ void display_lcd1(void const * argument)
     lv_timer_handler();
     osDelay(100);
 
-    /* Start camera streaming */
+    /* Start camera streaming + watchdog */
+    watchdog_init();
     camera_service_start();
 
     /* Track menu→recognize transition for state reset */
@@ -245,6 +247,10 @@ void display_lcd1(void const * argument)
         /* LVGL refresh */
         if (menu_is_recognize()) ui_service_update();
         lv_timer_handler();
+
+        /* Feed watchdog (~500 Hz, timeout 4 s) */
+        watchdog_feed();
+
         osDelay(2);
     }
   /* USER CODE END display_lcd1 */

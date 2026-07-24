@@ -47,6 +47,7 @@ virtualFolder:
                 - path: ../Service/camera_service.c
                 - path: ../Service/audio_service.c
                 - path: ../Service/ui_service.c
+                - path: ../Service/watchdog.c
               folders: []
             - name: Config
               files:

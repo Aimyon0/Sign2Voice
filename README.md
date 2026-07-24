@@ -18,6 +18,7 @@
 - **Voice feedback**: MP3-TF-16P module speaks recognized gestures
 - **Interactive menu**: LVGL v9 GUI with configurable settings
 - **Persistent configuration**: Settings survive power cycles (Flash storage)
+- **Watchdog**: IWDG with 4 s timeout prevents system hangs
 - **Custom model ready**: Swap any X-CUBE-AI compatible `.tflite` model
 
 ## Hardware
@@ -199,13 +200,13 @@ zero CPU cycles, zero Flash bytes, zero UART traffic.
 
 | Property | Value |
 |---|---|
-| Architecture | Custom CNN (X-CUBE-AI generated) |
-| Quantization | INT8 (weights + activations) |
+| Architecture | Custom CNN (X-CUBE-AI, ST Edge AI Core v2.2) |
+| Quantization | INT8 per-channel, CMSIS-NN optimized |
 | Input | 64×64×3 (preprocessed from RGB565 camera frame) |
 | Output | 5 classes: `fist`, `like`, `no_gesture`, `ok`, `palm` |
-| Inference time | ~135 ms |
-| Flash (weights) | ~216 KB |
-| RAM (activations) | ~40 KB |
+| Inference time | ~123 ms |
+| Flash (weights) | ~139 KB |
+| RAM (activations) | ~77 KB |
 
 ## Quick Start
 
@@ -252,7 +253,7 @@ See [plan.md](plan.md) for the full development roadmap.
 - [x] v1.0 — Functional prototype (gesture recognition + voice)
 - [x] v2.0 — Software architecture refactoring (App/Service/Driver layers)
 - [x] v2.1 — Reliability & maintainability (config persistence, error codes, logging, docs)
-- [ ] v2.2 — Performance optimization (CMSIS-NN)
+- [x] v2.2 — Performance optimization (CMSIS-NN, watchdog, benchmark)
 - [ ] v2.3 — Extended documentation & developer guide
 - [ ] v3.0 — Custom PCB hardware
 
